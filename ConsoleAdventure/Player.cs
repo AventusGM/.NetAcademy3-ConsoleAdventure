@@ -8,38 +8,61 @@ namespace ConsoleAdventure
 {
 	public class Player
 	{
-		public string Name { private set; get; }
+		public string Name { set; get; }
 		public int Health { private set; get; }
-		public int Armor { private set; get; }
-		public Weapon weapon { private set; get; }
+		public uint Armor { private set; get; }
+		public Weapon Weapon { set; get; }
 
-		public Player(string name)
+		public Player()
+		{
+			Name = null;
+			Health = 100;
+			Armor = 0;
+			Weapon = null;
+		}
+
+		public Player(string name, Weapon weapon)
 		{
 			Name = name;
 			Health = 100;
 			Armor = 0;
-			weapon = new Weapon("shotgun", 20, 350);
+			Weapon = weapon;
 		}
 
 		public void Run()
 		{
-			Random rand = new Random(49);
+			Random rand = new Random(1);
 
 			int damage = rand.Next();
 
-			if (damage % 2 == 0)
+			if (damage == 1)
 				Health -= damage;
 		}
 
 		public void Hurt(Enemy e)
 		{
-			if (e.GetDamage() <= 0)
+			if (e.GetDamage(Weapon.Damage) <= 0)
 				Health = 100;
 		}
 
-		public void GetDamage(uint damage)
+		public int GetDamage(uint damage)
 		{
-			Health -= (int)damage;
+			if (Armor >= damage)
+			{
+				Armor -= damage;
+			}
+			else if(Armor < damage && Armor > 0)
+			{
+				damage -= Armor;
+				Armor = 0;
+				Health -= (int)damage;
+			}
+			else
+			{
+				Health -= (int)damage;
+			}
+
+			return Health;
 		}
 
 		public void Heal(uint heal)
@@ -52,7 +75,7 @@ namespace ConsoleAdventure
 
 		public void GetArmor(uint armor)
 		{
-			Armor += (int)armor;
+			Armor += armor;
 		}
 	}
 }
