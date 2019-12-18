@@ -34,9 +34,9 @@ namespace ConsoleAdventure
             baseAttack = 5;
             damage = weapon.Damage + baseAttack;
         }
-        public void GetDamage()
+        public void GetDamage(Player p)
         {
-            Health -= 10;
+            Health -= p.Weapon.Damage;
         }
         public void Hit(ref Player p)
         {
