@@ -1,3 +1,10 @@
 
-ConsoleAdventure/.vs/ConsoleAdventure/v16/Server/sqlite3/storage.ide-shm
-ConsoleAdventure/.vs/ConsoleAdventure/v16/Server/sqlite3/storage.ide-wal
+ConsoleAdventure/.vs/ConsoleAdventure/v16/.suo
+ConsoleAdventure/.vs/ConsoleAdventure/v16/Server/sqlite3/db.lock
+ConsoleAdventure/.vs/ConsoleAdventure/v16/Server/sqlite3/storage.ide
+ConsoleAdventure/App.config
+ConsoleAdventure/ConsoleAdventure.csproj
+ConsoleAdventure/ConsoleAdventure.sln
+ConsoleAdventure/obj/Debug/ConsoleAdventure.csprojAssemblyReference.cache
+ConsoleAdventure/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+ConsoleAdventure/Properties/AssemblyInfo.cs
