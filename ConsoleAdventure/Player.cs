@@ -11,6 +11,8 @@ namespace ConsoleAdventure
 		public uint Armor { private set; get; }
 		public Weapon Weapon { set; get; }
 
+        //! add inventory using Inventory class
+
 		public Player()
 		{
 			Name = null;

@@ -15,9 +15,12 @@ namespace ConsoleAdventure
         }
     }
 
+    // Feel free to add your own weapons!
     public static class Weapons
     {
-        public static Weapon WoodenStick = new Weapon("Wooden stick", 1, 10, Rarities.Common, 0.4);
-        public static Weapon ShortSword = new Weapon("Short sword", 5, 8, Rarities.Common, 2);
+        public static Weapon WoodenStick = new Weapon("Wooden stick", 1, 15, Rarities.Common, 0.4);
+        public static Weapon ShortSword = new Weapon("Short sword", 5, 10, Rarities.Common, 0.8);
+        public static Weapon Sword = new Weapon("Sword", 10, 9, Rarities.Common, 1);
+        public static Weapon Claymore = new Weapon("Claymore", 15, 7, Rarities.Uncommon, 2.5);
     }
 }
