@@ -1,0 +1,6 @@
+﻿**/.vs/
+**/App.config
+**/*.csproj
+**/obj/
+**/bin/
+ConsoleAdventure/Properties/AssemblyInfo.cs
