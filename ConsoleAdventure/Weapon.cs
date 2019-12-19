@@ -3,10 +3,10 @@ namespace ConsoleAdventure
     public class Weapon : Item
     {
         public string Name { get; set; }
-        public double Damage { get; set; }
+        public uint Damage { get; set; }
         public double Speed { get; set; }
 
-        public Weapon(string name, double damage, double speed, Rarity rarity, double weight) 
+        public Weapon(string name, uint damage, double speed, Rarity rarity, double weight) 
             : base(rarity, weight)
         {
             Name = name;
@@ -17,7 +17,7 @@ namespace ConsoleAdventure
 
     public static class Weapons
     {
-        public static Weapon WoodenStick = new Weapon("Wooden stick", 1.0, 10, Rarities.Common, 0.4);
-        public static Weapon ShortSword = new Weapon("Short sword", 5.0, 8, Rarities.Common, 2);
+        public static Weapon WoodenStick = new Weapon("Wooden stick", 1, 10, Rarities.Common, 0.4);
+        public static Weapon ShortSword = new Weapon("Short sword", 5, 8, Rarities.Common, 2);
     }
 }
