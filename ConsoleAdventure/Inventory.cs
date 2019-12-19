@@ -17,7 +17,7 @@ namespace ConsoleAdventure
             Items.CollectionChanged += Items_CollectionChanged;
         }
 
-        public Inventory(List<Item> items)
+        public Inventory(List<Item> items) : this()
         {
             Items = Items;
         }
