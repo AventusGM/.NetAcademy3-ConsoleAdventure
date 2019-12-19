@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure
 {
-	public class Player
+	public class Player : Creature
 	{
-		public string Name { set; get; }
-		public int Health { private set; get; }
 		public uint Armor { private set; get; }
 		public Weapon Weapon { set; get; }
 
@@ -39,19 +37,19 @@ namespace ConsoleAdventure
 				Health -= damage;
 		}
 
-		public void Hurt(Enemy e)
+		public override void Hurt(Creature e)
 		{
 			if (e.GetDamage(Weapon.Damage) <= 0)
 				Health = 100;
 		}
 
-		public int GetDamage(uint damage)
+		public override int GetDamage(uint damage)
 		{
 			if (Armor >= damage)
 			{
 				Armor -= damage;
 			}
-			else if(Armor < damage && Armor > 0)
+			else if (Armor < damage && Armor > 0)
 			{
 				damage -= Armor;
 				Armor = 0;
