@@ -39,20 +39,32 @@ namespace ConsoleAdventure
 			Name = name;
 		}
 
-		public void Run()
+		public bool Run()
 		{
 			Random rand = new Random(2);
 
-			uint damageChance = (uint)rand.Next();
+			uint damageRandomizer = (uint)rand.Next();
 
-			if (damageChance == 0)
+			if (damageRandomizer != 0)
+			{
+				return true;
+			}
+			else
+			{
 				GetDamage(10);
+
+				return false;
+			}
 		}
 
 		public override void Hurt(Creature whoToHurt)
 		{
 			if (whoToHurt.GetDamage(Weapon.Damage) <= 0)
+			{
 				Heal(25);
+
+				//enemykilled event
+			}
 		}
 
 		public override int GetDamage(uint damage)
@@ -95,21 +107,32 @@ namespace ConsoleAdventure
 			return item;
 		}
 
-		public bool RmCurrentFromInventory()
+		public Item[] AddToInventory(Item[] items)
 		{
-			if (Inventory.Items.Count > 0)
+			foreach (Item current in items)
 			{
-				Inventory.Items.RemoveAt((int)InventoryCurrent);
-				return true;
+				AddToInventory(current);
 			}
-			else
-			{
-				Console.WriteLine("can not remove the only element from the inventory");
-				return false;
-			}
+
+			return items;
 		}
 
-		public bool SelectInventoryItem(uint index)
+		public IEnumerable<Item> AddToInventory(IEnumerable<Item> items)
+		{
+			foreach (Item current in items)
+			{
+				AddToInventory(current);
+			}
+
+			return items;
+		}
+
+		public void RmCurrentFromInventory()
+		{
+			Inventory.Items.RemoveAt((int)InventoryCurrent);
+		}
+
+		public bool SelectInventoryItem(uint index) //you can use Inventory.Items.IndexOf()
 		{
 			if (index < Inventory.Items.Count)
 			{
@@ -126,12 +149,18 @@ namespace ConsoleAdventure
 			}
 		}
 
-		public void UseCurrentItem()
+		public bool UseCurrentItem()
 		{
-			if (Inventory.Items[(int)InventoryCurrent].GetType() == typeof(Weapon))
-				Console.WriteLine("this is weapon, you can only hurt someone with it");
+			if (Inventory.Items[(int)InventoryCurrent] is IUsable)
+			{
+				((IUsable)Inventory.Items[(int)InventoryCurrent]).Use(this);
+
+				return true;
+			}
 			else
-				Inventory.Items[(int)InventoryCurrent].Use();
+			{
+				return false;
+			}
 		}
 
 		//add coords generate methods
