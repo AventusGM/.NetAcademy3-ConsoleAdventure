@@ -19,9 +19,9 @@ namespace ConsoleAdventure
             size = 0;
         }
 
-        public Location(string titlle, uint size)
+        public Location(string title, uint size)
         {
-            Title = titlle;
+            Title = title;
             this.size = size;
 
             //generate coords for player and enemy?

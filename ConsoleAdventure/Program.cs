@@ -5,41 +5,56 @@ namespace ConsoleAdventure
 {
     class Program
     {
+        bool running;
+        Player player;
+
         static void Main(string[] args)
         {
-            Init();
+            new Program().Start();
 
             Console.ReadKey();
         }
 
-        public static void Init()
+        void Start()
         {
-            string[] locations = { "forest", "mountains", "cave", "sea" };
-
-            Console.WriteLine("Welcome to Random Adventure!");
-            Console.WriteLine("____________________________");
-            Console.Write("Input here name: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("Hello, " + name + "!\n");
-
-            Console.WriteLine("Here is list of available locations:");
-            foreach (var loc in locations)
+            running = true;
+            
+            Menu();
+            while (running)
             {
-                Console.WriteLine("\t->" + loc);
             }
-            Console.WriteLine("Input location, where you want to relocate: ");
+        }
 
+        void Menu()
+        {
+            string[] locations = { "Forest", "Mountains", "Cave", "Sea" };
+
+            Console.WriteLine("Welcome to Console Adventure!");
+            Console.Write("Input your name: ");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Hello, " + name + "!\n");
+            Console.WriteLine("Available locations: ");
+
+            foreach (var loc in locations)
+                Console.WriteLine("\t[ " + loc + " ]");
+
+            Console.Write("Type name of location: ");
             string input = Console.ReadLine();
-            input.ToLower();
+
             foreach (var loc in locations)
             {
-                if (input == loc)
+                if (input.ToLower() == loc.ToLower())
                 {
-                    Console.WriteLine("You've been move to " + loc + " in a while");
-                    Thread.Sleep(3000);
-                    Console.WriteLine("You in " + loc + "!");
+                    Console.WriteLine("Loading " + loc);
+                    Thread.Sleep(1000);
+                    Console.WriteLine("Load. Now you in " + loc);
                 }
             }
+        }
+
+        void Update(Player player)
+        {
         }
     }
 }
