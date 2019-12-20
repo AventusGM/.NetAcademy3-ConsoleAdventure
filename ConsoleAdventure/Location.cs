@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure
 {
-    public struct Coords
-    {
-        public uint x;
-        public uint y;
-
-        public Coords(uint x, uint y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
     public class Location
     {
         public string Title { get; set; }
@@ -39,25 +27,44 @@ namespace ConsoleAdventure
             //generate coords for player and enemy?
         }
 
-        public Coords GeneratePlayerCoords()
+        //add overloaded constructors (with name or player object etc)?
+
+        public Coords GeneratePlayerCoords(Coords? enemyCoords) //move it to Creature as an abstract method
         {
             Random rand = new Random((int)size - 1);
+            Coords playerCoords;
 
-            Coords playerCoords = new Coords((uint)rand.Next(), (uint)rand.Next());
+            if (enemyCoords == null)
+            {
+                playerCoords = new Coords((uint)rand.Next(), (uint)rand.Next());
+            }
+            else
+            {
+                do
+                {
+                    playerCoords = new Coords((uint)rand.Next(), (uint)rand.Next());
+                } while (enemyCoords.Value.x == playerCoords.x && enemyCoords.Value.y == playerCoords.y);
+            }
 
             return playerCoords;
         }
 
-        public Coords GenerateEnemyCoords(Coords playerCoords)
+        public Coords GenerateEnemyCoords(Coords? playerCoords) //move it to Creature as an abstract method
         {
             Random rand = new Random((int)size - 1);
-
             Coords enemyCoords;
 
-            do
+            if (playerCoords == null)
             {
                 enemyCoords = new Coords((uint)rand.Next(), (uint)rand.Next());
-            } while (enemyCoords.x == playerCoords.x && enemyCoords.y == playerCoords.y);
+            }
+            else
+            {
+                do
+                {
+                    enemyCoords = new Coords((uint)rand.Next(), (uint)rand.Next());
+                } while (enemyCoords.x == playerCoords.Value.x && enemyCoords.y == playerCoords.Value.y);
+            }
 
             return enemyCoords;
         }

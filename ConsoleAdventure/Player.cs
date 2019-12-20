@@ -133,5 +133,7 @@ namespace ConsoleAdventure
 			else
 				Inventory.Items[(int)InventoryCurrent].Use();
 		}
+
+		//add coords generate methods
 	}
 }
