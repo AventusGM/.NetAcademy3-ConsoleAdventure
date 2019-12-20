@@ -7,6 +7,7 @@ namespace ConsoleAdventure
     {
         bool running;
         Player player;
+        InputHandler input;
 
         static void Main(string[] args)
         {
@@ -18,10 +19,12 @@ namespace ConsoleAdventure
         void Start()
         {
             running = true;
-            
+            input = new InputHandler();
+
             Menu();
             while (running)
             {
+                input.Handle();
             }
         }
 
@@ -51,10 +54,23 @@ namespace ConsoleAdventure
                     Console.WriteLine("Load. Now you in " + loc);
                 }
             }
+            ShowHelp();
         }
 
         void Update(Player player)
         {
+        }
+
+        public static void ShowHelp()
+        {
+            Console.WriteLine("+-------------------------+");
+            Console.WriteLine("| Help:                   |");
+            Console.WriteLine("| Using WASD for movement |");
+            Console.WriteLine("| Tab - inventory         |");
+            Console.WriteLine("| Space - attack          |");
+            Console.WriteLine("| E - using item          |");
+            Console.WriteLine("| M - show map            |");
+            Console.WriteLine("+-------------------------+");
         }
     }
 }
