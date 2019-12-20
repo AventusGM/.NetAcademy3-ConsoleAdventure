@@ -16,6 +16,26 @@ namespace ConsoleAdventure
             DropChance = chance;
             Color = color;
         }
+
+        public static bool operator ==(Rarity l, Rarity r)
+        {
+            return (l.Name == r.Name);
+        }
+
+        public static bool operator !=(Rarity l, Rarity r)
+        {
+            return !(l == r);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public static class Rarities
