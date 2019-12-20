@@ -8,40 +8,37 @@ namespace ConsoleAdventure
 {
     public class Enemy
     {
-        Int32 health;
-        String name;
-        UInt32 damage;
-        Weapon weapon;
-        UInt32 baseAttack;
+        public int Health { get; set; }
+        public string Name { get; set; }
+        public uint Damage { get; set; }
+        public uint BaseAttack { get; set; }
+        public Weapon weapon { get; set; }
 
-
-        public Int32 Health { get; set; }
-        public String Name { get; set; }
-        public UInt32 Damage { get; set; }
-        public Weapons Weapons { get; }
-        public UInt32 BaseAttack { get; set; }
-        public Enemy(Int32 health, String name, UInt32 damage, Weapons weapons, UInt32 baseAttack)
+        public Enemy(int health, string name, uint damage, uint baseAttack)
         {
             Health = health;
             Name = name;
             Damage = damage;
-            Weapons = weapons;
             BaseAttack = baseAttack;
         }
+
         public Enemy()
         {
-            health = 100;
-            baseAttack = 5;
-            damage = weapon.Damage + baseAttack;
+            Health = 100;
+            BaseAttack = 5;
+            Damage = weapon.Damage + BaseAttack;
         }
+
         public void GetDamage(Player p)
         {
-            Health -= p.Weapon.Damage;
+            Health -= Convert.ToInt32(p.Weapon.Damage);
         }
+
         public void Hit(ref Player p)
         {
             p.GetDamage(Damage);
         }
+
         public class Enemies
         {
             Enemy wolf = new Enemy { Name = "The Big Evil Wolf", Health = 80, BaseAttack = 20 };

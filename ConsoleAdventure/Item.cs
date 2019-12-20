@@ -17,5 +17,10 @@ namespace ConsoleAdventure
             Rarity = rarity;
             Weight = weight;
         }
+
+        public void Use()
+        {
+            // todo
+        }
     }
 }

@@ -15,7 +15,6 @@ namespace ConsoleAdventure
         }
     }
 
-    // Feel free to add your own weapons!
     public static class Weapons
     {
         public static Weapon WoodenStick = new Weapon("Wooden stick", 1, 15, Rarities.Common, 0.4);

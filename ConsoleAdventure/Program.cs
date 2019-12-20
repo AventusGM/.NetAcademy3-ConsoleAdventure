@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleAdventure
 {
@@ -41,7 +38,6 @@ namespace ConsoleAdventure
                     Console.WriteLine("You've been move to " + loc + " in a while");
                     Thread.Sleep(3000);
                     Console.WriteLine("You in " + loc + "!");
-                    // call loc method
                 }
             }
         }
