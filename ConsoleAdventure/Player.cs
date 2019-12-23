@@ -162,12 +162,12 @@ namespace ConsoleAdventure
 		public override bool MoveUp(Location currentLocation)
 		{
 			Coords potentialCoords = new Coords();
-			potentialCoords.x = Coords.Value.x;
-			potentialCoords.y = Coords.Value.y;
+			potentialCoords.X = Coords.Value.X;
+			potentialCoords.Y = Coords.Value.Y;
 
-			--potentialCoords.y;
+			--potentialCoords.Y;
 
-			if (potentialCoords.y >= 0 && potentialCoords.y < currentLocation.Size)
+			if (potentialCoords.Y >= 0 && potentialCoords.Y < currentLocation.Size)
 			{
 				Coords = potentialCoords;
 				return true;
@@ -179,12 +179,12 @@ namespace ConsoleAdventure
 		public override bool MoveDown(Location currentLocation)
 		{
 			Coords potentialCoords = new Coords();
-			potentialCoords.x = Coords.Value.x;
-			potentialCoords.y = Coords.Value.y;
+			potentialCoords.X = Coords.Value.X;
+			potentialCoords.Y = Coords.Value.Y;
 
-			++potentialCoords.y;
+			++potentialCoords.Y;
 
-			if (potentialCoords.y >= 0 && potentialCoords.y < currentLocation.Size)
+			if (potentialCoords.Y >= 0 && potentialCoords.Y < currentLocation.Size)
 			{
 				Coords = potentialCoords;
 				return true;
@@ -196,12 +196,12 @@ namespace ConsoleAdventure
 		public override bool MoveLeft(Location currentLocation)
 		{
 			Coords potentialCoords = new Coords();
-			potentialCoords.x = Coords.Value.x;
-			potentialCoords.y = Coords.Value.y;
+			potentialCoords.X = Coords.Value.X;
+			potentialCoords.Y = Coords.Value.Y;
 
-			--potentialCoords.x;
+			--potentialCoords.X;
 
-			if (potentialCoords.x >= 0 && potentialCoords.x < currentLocation.Size)
+			if (potentialCoords.X >= 0 && potentialCoords.X < currentLocation.Size)
 			{
 				Coords = potentialCoords;
 				return true;
@@ -213,12 +213,12 @@ namespace ConsoleAdventure
 		public override bool MoveRight(Location currentLocation)
 		{
 			Coords potentialCoords = new Coords();
-			potentialCoords.x = Coords.Value.x;
-			potentialCoords.y = Coords.Value.y;
+			potentialCoords.X = Coords.Value.X;
+			potentialCoords.Y = Coords.Value.Y;
 
-			++potentialCoords.x;
+			++potentialCoords.X;
 
-			if (potentialCoords.x >= 0 && potentialCoords.x < currentLocation.Size)
+			if (potentialCoords.X >= 0 && potentialCoords.X < currentLocation.Size)
 			{
 				Coords = potentialCoords;
 				return true;

@@ -8,13 +8,13 @@ namespace ConsoleAdventure
 {
 	public struct Coords
 	{
-		public int x;
-		public int y;
+		public int X;
+		public int Y;
 
 		public Coords(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			X = x;
+			Y = y;
 		}
 	}
 

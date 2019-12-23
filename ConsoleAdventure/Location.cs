@@ -66,8 +66,8 @@ namespace ConsoleAdventure
 
 	public static class Locations
 	{
-		public static Location hardLocation = new Location("hurt me", 4);
-		public static Location midLocation = new Location("challenge", 7);
-		public static Location easyLocation = new Location("i dont want to die", 15);
+		public static Location HardLocation = new Location("hurt me", 4);
+		public static Location MidLocation = new Location("challenge", 7);
+		public static Location EasyLocation = new Location("i dont want to die", 15);
 	}
 }
