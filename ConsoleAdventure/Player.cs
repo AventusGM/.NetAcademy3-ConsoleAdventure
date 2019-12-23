@@ -61,7 +61,7 @@ namespace ConsoleAdventure
 		{
 			Random rand = new Random(2);
 
-			uint damageRandomizer = (uint)rand.Next();
+			int damageRandomizer = rand.Next();
 
 			if (damageRandomizer != 0)
 			{
@@ -157,6 +157,74 @@ namespace ConsoleAdventure
 			{
 				return false;
 			}
+		}
+
+		public override bool MoveUp(Location currentLocation)
+		{
+			Coords potentialCoords = new Coords();
+			potentialCoords.x = Coords.Value.x;
+			potentialCoords.y = Coords.Value.y;
+
+			--potentialCoords.y;
+
+			if (potentialCoords.y >= 0 && potentialCoords.y < currentLocation.Size)
+			{
+				Coords = potentialCoords;
+				return true;
+			}
+
+			return false;
+		}
+
+		public override bool MoveDown(Location currentLocation)
+		{
+			Coords potentialCoords = new Coords();
+			potentialCoords.x = Coords.Value.x;
+			potentialCoords.y = Coords.Value.y;
+
+			++potentialCoords.y;
+
+			if (potentialCoords.y >= 0 && potentialCoords.y < currentLocation.Size)
+			{
+				Coords = potentialCoords;
+				return true;
+			}
+
+			return false;
+		}
+
+		public override bool MoveLeft(Location currentLocation)
+		{
+			Coords potentialCoords = new Coords();
+			potentialCoords.x = Coords.Value.x;
+			potentialCoords.y = Coords.Value.y;
+
+			--potentialCoords.x;
+
+			if (potentialCoords.x >= 0 && potentialCoords.x < currentLocation.Size)
+			{
+				Coords = potentialCoords;
+				return true;
+			}
+
+			return false;
+		}
+
+		public override bool MoveRight(Location currentLocation)
+		{
+			Coords potentialCoords = new Coords();
+			potentialCoords.x = Coords.Value.x;
+			potentialCoords.y = Coords.Value.y;
+
+			++potentialCoords.x;
+
+			if (potentialCoords.x >= 0 && potentialCoords.x < currentLocation.Size)
+			{
+				Coords = potentialCoords;
+				return true;
+			}
+
+			return false;
 		}
 
 		/*public Item AddToInventory(Item item)

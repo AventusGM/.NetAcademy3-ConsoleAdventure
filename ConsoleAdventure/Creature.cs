@@ -8,10 +8,10 @@ namespace ConsoleAdventure
 {
 	public struct Coords
 	{
-		public uint x;
-		public uint y;
+		public int x;
+		public int y;
 
-		public Coords(uint x, uint y)
+		public Coords(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
@@ -42,22 +42,22 @@ namespace ConsoleAdventure
 
 			if (otherCreaturesAndObjects == null)
 			{
-				Coords = new Coords((uint)rand.Next(), (uint)rand.Next());
+				Coords = new Coords(rand.Next(), rand.Next());
 			}
 			else
 			{
 				do
 				{
-					Coords = new Coords((uint)rand.Next(), (uint)rand.Next());
+					Coords = new Coords(rand.Next(), rand.Next());
 				} while (otherCreaturesAndObjects.Contains(Coords));
 			}
 
 			return Coords;
 		}
 
-		public abstract Coords? MoveUp(Location currentLocation);   //returns new Coords
-		public abstract Coords? MoveDown(Location currentLocation);   //returns new Coords
-		public abstract Coords? MoveLeft(Location currentLocation);   //returns new Coords
-		public abstract Coords? MoveRight(Location currentLocation);   //returns new Coords
+		public abstract bool MoveUp(Location currentLocation);
+		public abstract bool MoveDown(Location currentLocation);
+		public abstract bool MoveLeft(Location currentLocation);
+		public abstract bool MoveRight(Location currentLocation);
 	}
 }
