@@ -17,12 +17,24 @@ namespace ConsoleAdventure
         }
     }
 
-    public static class QuestManager
+    public static class QuestHelper
     {
         public static void GiveQuest(Quest quest)
         {
             //TODO
             //player.Quests.Add(quest);
+        }
+    }
+
+    public class QuestManager
+    {
+        public List<Quest> Quests { get; protected set; }
+        private readonly Player player;
+
+        public QuestManager(Player player)
+        {
+            Quests = new List<Quest>();
+            this.player = player;
         }
     }
 
