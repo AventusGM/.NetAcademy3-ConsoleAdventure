@@ -54,5 +54,10 @@ namespace ConsoleAdventure
 
 			return Coords;
 		}
+
+		public abstract Coords? MoveUp(Location currentLocation);   //returns new Coords
+		public abstract Coords? MoveDown(Location currentLocation);   //returns new Coords
+		public abstract Coords? MoveLeft(Location currentLocation);   //returns new Coords
+		public abstract Coords? MoveRight(Location currentLocation);   //returns new Coords
 	}
 }
