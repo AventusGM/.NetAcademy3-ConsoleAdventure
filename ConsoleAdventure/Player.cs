@@ -9,19 +9,10 @@ namespace ConsoleAdventure
 	public class Player : Creature
 	{
 		public uint Armor { private set; get; }
-		public Weapon Weapon
-		{
-			set
-			{
-				Weapon = value;
-
-				if (!Inventory.Items.Contains(value))
-					AddToInventory(value);
-			}
-			get => Weapon;
-		}
 		public Inventory Inventory { private set; get; }
-		public uint InventoryCurrent { private set; get; }
+		public Item CurrentItem { set; get; }
+
+		public event EventHandler<KilledTheEnemyEventArgs> KilledTheEnemy;
 
 		public Player()
 		{
@@ -29,14 +20,41 @@ namespace ConsoleAdventure
 			Health = 100;
 			Armor = 0;
 			Inventory = new Inventory();
-			Inventory.Items.Add(Weapons.Sword);
-			InventoryCurrent = 0;
-			Weapon = (Weapon)Inventory.Items[0];
+			CurrentItem = Weapons.WoodenStick;
+			Coords = null;
 		}
 
 		public Player(string name) : this()
 		{
 			Name = name;
+		}
+
+		public Player(string name, List<Coords?> otherCreaturesAndObjects, Location location) : this(name)
+		{
+			try
+			{
+				GenerateCoords(otherCreaturesAndObjects, location);
+			}
+			catch (ArgumentNullException)
+			{
+				throw;
+			}
+			catch (ArgumentException)
+			{
+				throw;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		protected virtual void OnKilledTheEnemy(KilledTheEnemyEventArgs args)
+		{
+			EventHandler<KilledTheEnemyEventArgs> handler = KilledTheEnemy;
+
+			if (handler != null)
+				handler(this, args);
 		}
 
 		public bool Run()
@@ -59,11 +77,26 @@ namespace ConsoleAdventure
 
 		public override void Hurt(Creature whoToHurt)
 		{
-			if (whoToHurt.GetDamage(Weapon.Damage) <= 0)
+			if (CurrentItem.GetType() == typeof(Weapon))
 			{
-				Heal(25);
+				if (whoToHurt.GetDamage(((Weapon)CurrentItem).Damage) <= 0)
+				{
+					Heal(20);
 
-				//enemykilled event
+					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt.Name);
+					OnKilledTheEnemy(args);
+				}
+
+			}
+			else
+			{
+				if (whoToHurt.GetDamage(1) <= 0)
+				{
+					Heal(25);
+
+					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt.Name);
+					OnKilledTheEnemy(args);
+				}
 			}
 		}
 
@@ -100,9 +133,43 @@ namespace ConsoleAdventure
 			Armor += armor;
 		}
 
-		public Item AddToInventory(Item item)
+		public void SelectInventoryItem(int index) //you can use Inventory.Items.IndexOf()
 		{
-			Inventory.Items.Add(item);
+			if (index < 0 || index > Inventory.Items.Count)
+				throw new IndexOutOfRangeException("public bool SelectInventoryItem(int index) in class Player: index argument was outside of the bounds");
+
+			Inventory.Items.Add(CurrentItem);
+
+			CurrentItem = Inventory.Items[index];
+
+			Inventory.Items.RemoveAt(index);
+		}
+
+		public bool UseCurrentItem()
+		{
+			if (CurrentItem is IUsable)
+			{
+				((IUsable)CurrentItem).Use(this);
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/*public Item AddToInventory(Item item)
+		{
+			if (item.GetType() == typeof(Weapon))
+			{
+				if (!Inventory.Items.Contains(item))
+					Inventory.Items.Add(item);
+			}
+			else
+			{
+				Inventory.Items.Add(item);
+			}
 
 			return item;
 		}
@@ -130,39 +197,6 @@ namespace ConsoleAdventure
 		public void RmCurrentFromInventory()
 		{
 			Inventory.Items.RemoveAt((int)InventoryCurrent);
-		}
-
-		public bool SelectInventoryItem(uint index) //you can use Inventory.Items.IndexOf()
-		{
-			if (index < Inventory.Items.Count)
-			{
-				InventoryCurrent = index;
-
-				if (Inventory.Items[(int)InventoryCurrent].GetType() == typeof(Weapon))
-					Weapon = (Weapon)Inventory.Items[(int)InventoryCurrent];
-
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool UseCurrentItem()
-		{
-			if (Inventory.Items[(int)InventoryCurrent] is IUsable)
-			{
-				((IUsable)Inventory.Items[(int)InventoryCurrent]).Use(this);
-
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		//add coords generate methods
+		}*/
 	}
 }
