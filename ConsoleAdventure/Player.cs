@@ -83,7 +83,7 @@ namespace ConsoleAdventure
 				{
 					Heal(20);
 
-					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt.Name);
+					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt);
 					OnKilledTheEnemy(args);
 				}
 
@@ -94,7 +94,7 @@ namespace ConsoleAdventure
 				{
 					Heal(25);
 
-					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt.Name);
+					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt);
 					OnKilledTheEnemy(args);
 				}
 			}
