@@ -45,7 +45,7 @@ namespace ConsoleAdventure
         public class Enemies
         {
             Enemy wolf = new Enemy { Name = "The Big Evil Wolf", Health = 80, BaseAttack = 20 };
-            Enemy forsaken = new Enemy { Name = "Forsaken", Health = 100, BaseAttack = 20, weapon = Weapons.WoodenStick };
+            Enemy forsaken = new Enemy { Name = "Forsaken", Health = 100, BaseAttack = 20, weapon = Weapons.WoodenClub };
             Enemy rough = new Enemy { Name = "Rough", Health = 100, BaseAttack = 25, weapon = Weapons.ShortSword };
         }
     }

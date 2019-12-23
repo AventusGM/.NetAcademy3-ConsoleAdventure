@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure.NPC
 {
-    // Work in progress
     public class Dialog
     {
         List<DialogResponse> Responses { get; set; }

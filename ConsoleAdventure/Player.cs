@@ -11,6 +11,7 @@ namespace ConsoleAdventure
 		public uint Armor { private set; get; }
 		public Inventory Inventory { private set; get; }
 		public Item CurrentItem { set; get; }
+        private QuestManager QuestManager;
 
 		public event EventHandler<KilledTheCreatureEventArgs> KilledTheEnemy;
 
@@ -20,7 +21,8 @@ namespace ConsoleAdventure
 			Health = 100;
 			Armor = 0;
 			Inventory = new Inventory();
-			CurrentItem = Weapons.WoodenStick;
+            QuestManager = new QuestManager(this);
+			CurrentItem = Weapons.WoodenClub;
 			Coords = null;
 		}
 

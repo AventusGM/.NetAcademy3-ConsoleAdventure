@@ -22,8 +22,8 @@ namespace ConsoleAdventure
 
     public static class HealthBoosters
     {
-        public static HealthBoost SmallHealthPotion = new HealthBoost("Small health potion", 50, Rarities.Common, 0.1);
-        public static HealthBoost HealthPotion = new HealthBoost("Health potion", 120, Rarities.Common, 0.25);
-        public static HealthBoost GreaterHealthPotion = new HealthBoost("Greater health potion", 200, Rarities.Uncommon, 0.30);
+        public static HealthBoost SmallHealthPotion = new HealthBoost("Small health potion", 30, Rarities.Common, 0.1);
+        public static HealthBoost HealthPotion = new HealthBoost("Health potion", 50, Rarities.Common, 0.25);
+        public static HealthBoost GreaterHealthPotion = new HealthBoost("Greater health potion", 100, Rarities.Uncommon, 0.30);
     }
 }

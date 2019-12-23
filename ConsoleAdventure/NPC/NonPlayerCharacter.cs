@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure.NPC
 {
-    // Work in progress
     public class NonPlayerCharacter
     {
         public string Name { get; set; }

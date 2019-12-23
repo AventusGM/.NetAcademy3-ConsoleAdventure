@@ -18,28 +18,45 @@ namespace ConsoleAdventure
         }
     }
 
+    public class KillQuest<T> : Quest where T: Creature
+    {
+        T KillTarget { get; set; }
+        KillQuest(string name, string description) : 
+            base(name, description)
+        {
+
+        }
+    }
+
     public static class QuestHelper
     {
         public static void GiveQuest(Quest quest)
         {
             //TODO
-            QuestManager questManager = new QuestManager();
-            questManager.AddQuest(quest);
         }
     }
 
     public class QuestManager
     {
+        private Player player;
+
         private List<Quest> Quests;
-        public QuestManager()
+        public QuestManager(Player player)
         {
             Quests = new List<Quest>();
+            this.player = player;
+            this.player.KilledTheEnemy += Player_KilledTheEnemy;
         }
 
         public void AddQuest(Quest quest)
         {
             QuestDisplay.NotifyNewQuest(quest);
             Quests.Add(quest);
+        }
+
+        private void Player_KilledTheEnemy(object sender, KilledTheCreatureEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 
