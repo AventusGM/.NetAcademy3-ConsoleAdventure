@@ -29,7 +29,7 @@ namespace ConsoleAdventure.NPC
                 new DialogResponse("Yes I need.",
                     ()=> new Dialog("Great! TODO. Here is your first task, do you accept it?", new List<DialogResponse>
                     {
-                        new DialogResponse("Yes.",() => QuestManager.GiveQuest(Quests.TheBeginning)),
+                        new DialogResponse("Yes.",() => QuestHelper.GiveQuest(Quests.TheBeginning)),
                         new DialogResponse("No.", null),
                     }).Activate()),
                 new DialogResponse("No, i want to figure everything by myself", null)
