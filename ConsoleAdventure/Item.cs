@@ -8,7 +8,9 @@ namespace ConsoleAdventure
 {
     public class Item
     {
-        public static readonly List<Item> DefinedItems;
+        public static readonly List<Item> DefinedItems = new List<Item>();
+
+        public string Name { get; set; }
 
         public Rarity Rarity { get; set; }
 
@@ -19,17 +21,13 @@ namespace ConsoleAdventure
         // could be found in chests or dropped from enemies
         public readonly bool CanDrop;
 
-        public Item(Rarity rarity, double weight)
+        public Item(string name, Rarity rarity, double weight)
         {
+            Name = name;
             Rarity = rarity;
             Weight = weight;
             CanDrop = true;
             DefinedItems.Add(this);
-        }
-
-        public void Use()
-        {
-            // todo
         }
     }
 }

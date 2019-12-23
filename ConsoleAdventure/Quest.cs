@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleAdventure.Display;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,19 +23,23 @@ namespace ConsoleAdventure
         public static void GiveQuest(Quest quest)
         {
             //TODO
-            //player.Quests.Add(quest);
+            QuestManager questManager = new QuestManager();
+            questManager.AddQuest(quest);
         }
     }
 
     public class QuestManager
     {
-        public List<Quest> Quests { get; protected set; }
-        private readonly Player player;
-
-        public QuestManager(Player player)
+        private List<Quest> Quests;
+        public QuestManager()
         {
             Quests = new List<Quest>();
-            this.player = player;
+        }
+
+        public void AddQuest(Quest quest)
+        {
+            QuestDisplay.NotifyNewQuest(quest);
+            Quests.Add(quest);
         }
     }
 

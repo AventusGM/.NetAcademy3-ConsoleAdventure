@@ -9,24 +9,21 @@ namespace ConsoleAdventure
     public class HealthBoost : Item, IUsable
     {
         public uint HealAmount { get; }
-        public HealthBoost(uint healAmount, Rarity rarity, double weight) : base(rarity, weight)
+        public HealthBoost(string name, uint healAmount, Rarity rarity, double weight) : base(name, rarity, weight)
         {
             HealAmount = healAmount;
         }
 
-        public void Use(Creature user)
+        public void Use(Player user)
         {
-            if(user is Player)
-            {
-                ((Player)user).Heal(HealAmount);
-            }
+            user.Heal(HealAmount);
         }
     }
 
     public static class HealthBoosters
     {
-        public static HealthBoost SmallHealthPotion = new HealthBoost(50, Rarities.Common, 0.1);
-        public static HealthBoost HealthPotion = new HealthBoost(120, Rarities.Common, 0.25);
-        public static HealthBoost GreaterHealthPotion = new HealthBoost(200, Rarities.Uncommon, 0.30);
+        public static HealthBoost SmallHealthPotion = new HealthBoost("Small health potion", 50, Rarities.Common, 0.1);
+        public static HealthBoost HealthPotion = new HealthBoost("Health potion", 120, Rarities.Common, 0.25);
+        public static HealthBoost GreaterHealthPotion = new HealthBoost("Greater health potion", 200, Rarities.Uncommon, 0.30);
     }
 }

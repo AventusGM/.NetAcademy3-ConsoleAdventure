@@ -14,18 +14,25 @@ namespace ConsoleAdventure
 
         public Inventory() 
         {
+            if(Items == null) Items = new ObservableCollection<Item>();
             Items.CollectionChanged += Items_CollectionChanged;
         }
 
-        public Inventory(List<Item> items) : this()
+        public Inventory(ObservableCollection<Item> items) : this()
         {
-            Items = Items;
+            Items = items;
+            CalculateWeight();
         }
 
         private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            CalculateWeight();
+        }
+
+        private void CalculateWeight()
+        {
             TotalWeight = 0;
-            foreach(Item item in Items)
+            foreach (Item item in Items)
             {
                 TotalWeight += item.Weight;
             }

@@ -10,16 +10,18 @@ namespace ConsoleAdventure.NPC
     public class Dialog
     {
         List<DialogResponse> Responses { get; set; }
+        string InitialVerb;
 
         public Dialog(string verb, List<DialogResponse> responses)
         {
             Responses = responses;
-            DialogWriter.Write(verb);
+            InitialVerb = verb;
         }
 
         public void Activate()
         {
-
+            DialogWriter.Write(InitialVerb);
+            ResponseHandler.HandleResponses(Responses);
         }
     }
 
@@ -31,6 +33,29 @@ namespace ConsoleAdventure.NPC
         {
             ResponseText = responseText;
             Consequence = consequence;
+        }
+    }
+
+    internal class ResponseHandler
+    {
+        public static void HandleResponses(List<DialogResponse> responses)
+        {
+            DialogWriter.WriteResponses(responses);
+
+        ReadResponse:
+            int responseIndex = (int)char.GetNumericValue(Console.ReadKey().KeyChar)-1;
+            if(responseIndex != null && responseIndex >= 0 && responseIndex < responses.Count )
+            {
+                DialogWriter.WritePlayer(responses[responseIndex].ResponseText);
+                if(responses[responseIndex].Consequence != null)
+                {
+                    responses[responseIndex].Consequence.Invoke();
+                }
+            }
+            else
+            {
+                goto ReadResponse;
+            }
         }
     }
 }

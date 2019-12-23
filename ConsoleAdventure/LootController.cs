@@ -97,7 +97,7 @@ namespace ConsoleAdventure
     public static class Loot
     {
         // For example
-        public static Item WolfLeather = new Item(Rarities.Common, 0.3);
-        public static Item WolfMeat = new Item(Rarities.Common, 1);
+        public static Item WolfLeather = new Item("Wolf leather", Rarities.Common, 0.3);
+        public static Item WolfMeat = new Item("Wolf meat", Rarities.Common, 1);
     }
 }

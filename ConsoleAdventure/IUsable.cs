@@ -8,6 +8,6 @@ namespace ConsoleAdventure
 {
     interface IUsable
     {
-        void Use(Creature user);
+        void Use(Player user);
     }
 }
