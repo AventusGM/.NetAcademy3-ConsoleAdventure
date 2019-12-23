@@ -6,11 +6,11 @@ using System.Threading.Tasks;*/
 
 namespace ConsoleAdventure
 {
-	public class KilledTheEnemyEventArgs : EventArgs
+	public class KilledTheCreatureEventArgs : EventArgs
 	{
-		public Enemy Enemy { protected set; get; }
+		public Creature Enemy { protected set; get; }
 
-		public KilledTheEnemyEventArgs(Enemy enemy)
+		public KilledTheCreatureEventArgs(Creature enemy)
 		{
 			Enemy = enemy;
 		}

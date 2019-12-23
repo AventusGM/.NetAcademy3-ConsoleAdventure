@@ -31,7 +31,10 @@ namespace ConsoleAdventure
 
         public void GetDamage(Player p)
         {
-            Health -= Convert.ToInt32(p.Weapon.Damage);
+            if(p.CurrentItem is Weapon)
+            {
+                Health -= Convert.ToInt32(((Weapon)p.CurrentItem).Damage);
+            }
         }
 
         public void Hit(ref Player p)

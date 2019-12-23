@@ -12,7 +12,7 @@ namespace ConsoleAdventure
 		public Inventory Inventory { private set; get; }
 		public Item CurrentItem { set; get; }
 
-		public event EventHandler<KilledTheEnemyEventArgs> KilledTheEnemy;
+		public event EventHandler<KilledTheCreatureEventArgs> KilledTheEnemy;
 
 		public Player()
 		{
@@ -49,9 +49,9 @@ namespace ConsoleAdventure
 			}
 		}
 
-		protected virtual void OnKilledTheEnemy(KilledTheEnemyEventArgs args)
+		protected virtual void OnKilledTheEnemy(KilledTheCreatureEventArgs args)
 		{
-			EventHandler<KilledTheEnemyEventArgs> handler = KilledTheEnemy;
+			EventHandler<KilledTheCreatureEventArgs> handler = KilledTheEnemy;
 
 			if (handler != null)
 				handler(this, args);
@@ -83,7 +83,7 @@ namespace ConsoleAdventure
 				{
 					Heal(20);
 
-					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt);
+					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
 					OnKilledTheEnemy(args);
 				}
 
@@ -94,7 +94,7 @@ namespace ConsoleAdventure
 				{
 					Heal(25);
 
-					KilledTheEnemyEventArgs args = new KilledTheEnemyEventArgs(whoToHurt);
+					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
 					OnKilledTheEnemy(args);
 				}
 			}
