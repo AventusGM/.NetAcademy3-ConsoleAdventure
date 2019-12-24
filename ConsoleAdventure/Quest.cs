@@ -11,20 +11,41 @@ namespace ConsoleAdventure
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Quest(string name, string description)
+        public bool Completed { get; set; }
+        public IEnumerable<Item> Reward { get; set; }
+
+        public Quest(string name, string description, IEnumerable<Item> reward)
         {
             Name = name;
             Description = description;
+            Reward = reward;
         }
     }
 
-    public class KillQuest<T> : Quest where T: Creature
+    // Using generics here causes more 
+    // problems in below code than it solves.
+    public class KillQuest : Quest
     {
-        T KillTarget { get; set; }
-        KillQuest(string name, string description) : 
-            base(name, description)
-        {
+        public Type TargetCreature { get; }
+        public int TargetCount { get; }
 
+        private int actualCount;
+        public int ActualCount
+        {
+            get => actualCount;
+            set
+            {
+                actualCount = value;
+                if (actualCount >= TargetCount) Completed = true;
+            }
+        }
+
+        public KillQuest(string name, string description, IEnumerable<Item> reward, Type creatureType, int count) 
+            : base(name, description, reward)
+        {
+            TargetCreature = creatureType;
+            TargetCount = count;
+            ActualCount = 0;
         }
     }
 
@@ -50,7 +71,15 @@ namespace ConsoleAdventure
 
         private void Player_KilledTheCreature(object sender, KilledTheCreatureEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach(Quest quest in Quests)
+            {
+                if(quest is KillQuest)
+                {
+                    if (e.Creature.GetType() == ((KillQuest)quest).TargetCreature)
+                        ((KillQuest)quest).ActualCount++;
+                }
+                if (quest.Completed) player.Inventory.Items.Concat(quest.Reward);
+            }
         }
 
         public void AddQuest(Quest quest)
@@ -62,6 +91,8 @@ namespace ConsoleAdventure
 
     public static class Quests
     {
-        public static Quest TheBeginning = new Quest("The beginning", "Kill your first enemy");
+        public static Quest TheBeginning = new KillQuest("The beginning", "Kill your first enemy"
+            ,new List<Item>() { Weapons.Sword, HealthBoosters.HealthPotion }
+            ,typeof(Creature), 1);
     }
 }

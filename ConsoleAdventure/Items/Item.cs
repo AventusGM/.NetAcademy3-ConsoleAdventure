@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure
 {
-    public class Item
+    public class Item : ICloneable
     {
+        /// <summary>
+        /// Contains every sample of defined items.
+        /// </summary>
         public static readonly List<Item> DefinedItems = new List<Item>();
 
         public string Name { get; set; }
@@ -27,7 +30,15 @@ namespace ConsoleAdventure
             Rarity = rarity;
             Weight = weight;
             CanDrop = true;
-            DefinedItems.Add(this);
+        }
+
+        public Item(Item copyFrom)
+            : this(copyFrom.Name, copyFrom.Rarity, copyFrom.Weight)
+        { }
+
+        public object Clone()
+        {
+            return new Item(this);
         }
     }
 }

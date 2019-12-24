@@ -68,7 +68,7 @@ namespace ConsoleAdventure
                 foreach (Item item in Item.DefinedItems
                     .FindAll(i => i.Rarity == rarity && i.CanDrop))
                 {
-                    items.Add(item);
+                    items.Add((Item)item.Clone());
                 }
             }
             return items;
