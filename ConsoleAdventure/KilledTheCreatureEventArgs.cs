@@ -8,11 +8,11 @@ namespace ConsoleAdventure
 {
 	public class KilledTheCreatureEventArgs : EventArgs
 	{
-		public Creature Enemy { protected set; get; }
+		public Creature Creature { protected set; get; }
 
-		public KilledTheCreatureEventArgs(Creature enemy)
+		public KilledTheCreatureEventArgs(Creature creature)
 		{
-			Enemy = enemy;
+			Creature = creature;
 		}
 	}
 }
