@@ -26,7 +26,7 @@ namespace ConsoleAdventure
             Weight = weight;
             CanDrop = true;
         }
-
+      
         public Item(Item copyFrom)
             : this(copyFrom.Name, copyFrom.Rarity, copyFrom.Weight)
         { }
