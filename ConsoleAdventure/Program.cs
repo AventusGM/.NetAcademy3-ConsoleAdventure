@@ -10,6 +10,7 @@ namespace ConsoleAdventure
         Player player;
         Location location;
         InputHandler input;
+        string playerName;
 
         List<Coords?> list;
         public static Coords enemy;
@@ -27,7 +28,8 @@ namespace ConsoleAdventure
             list = new List<Coords?>();
             input = new InputHandler();
             location = new Location(Menu());
-            player = new Player("Player", SpawnEnemies(list, 5) ,location);
+            player = new Player(playerName, SpawnEnemies(list, 5), location);
+            
 
             while (running)
             {
@@ -54,9 +56,9 @@ namespace ConsoleAdventure
             string[] locations = { "Forest", "Mountains", "Cave", "Sea" };
 
             Console.WriteLine("Welcome to Console Adventure!");
-            //Console.Write("Input your name: ");
-            //string name = Console.ReadLine();
-            //Console.WriteLine("Hello, " + name + "!\n");
+            Console.Write("Input your name: ");
+            playerName = Console.ReadLine();
+            Console.WriteLine("Hello, " + playerName + "!\n");
             Console.WriteLine("Available locations: ");
 
             foreach (var loc in locations)
