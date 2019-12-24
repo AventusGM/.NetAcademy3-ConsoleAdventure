@@ -45,18 +45,18 @@ namespace ConsoleAdventure
         {
             Quests = new List<Quest>();
             this.player = player;
-            this.player.KilledTheEnemy += Player_KilledTheEnemy;
+            this.player.KilledTheCreature += Player_KilledTheCreature;
+        }
+
+        private void Player_KilledTheCreature(object sender, KilledTheCreatureEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddQuest(Quest quest)
         {
             QuestDisplay.NotifyNewQuest(quest);
             Quests.Add(quest);
-        }
-
-        private void Player_KilledTheEnemy(object sender, KilledTheCreatureEventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 
