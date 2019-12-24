@@ -88,6 +88,8 @@ namespace ConsoleAdventure
 				{
 					Heal(20);
 
+
+
 					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
 					OnKilledTheCreature(args);
 				}
