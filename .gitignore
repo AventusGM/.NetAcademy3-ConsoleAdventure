@@ -1,6 +1,7 @@
 **/.vs/
 **/App.config
 **/*.csproj
+**/*.csproj.user
 **/obj/
 **/bin/
 *.sln
