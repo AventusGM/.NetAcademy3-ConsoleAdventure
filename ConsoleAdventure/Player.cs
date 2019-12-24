@@ -88,6 +88,8 @@ namespace ConsoleAdventure
 				{
 					Heal(20);
 
+					Inventory.Items.Concat(LootController.GetCreatureLoot(whoToHurt));
+
 					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
 					OnKilledTheCreature(args);
 				}
@@ -97,6 +99,8 @@ namespace ConsoleAdventure
 				if (whoToHurt.GetDamage(1) <= 0)
 				{
 					Heal(25);
+
+					Inventory.Items.Concat(LootController.GetCreatureLoot(whoToHurt));
 
 					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
 					OnKilledTheCreature(args);
