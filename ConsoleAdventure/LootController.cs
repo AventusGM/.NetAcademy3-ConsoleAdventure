@@ -65,7 +65,7 @@ namespace ConsoleAdventure
             List<Item> items = new List<Item>();
             foreach(Rarity rarity in rarities)
             {
-                foreach (Item item in Item.DefinedItems
+                foreach (Item item in PredefinedObjects.Items.ToList()
                     .FindAll(i => i.Rarity == rarity && i.CanDrop))
                 {
                     items.Add((Item)item.Clone());
