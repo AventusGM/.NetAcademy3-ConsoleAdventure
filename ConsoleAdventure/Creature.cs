@@ -16,20 +16,6 @@ namespace ConsoleAdventure
 			X = x;
 			Y = y;
 		}
-
-		public override bool Equals(object obj)
-		{
-			if (obj == null || !this.GetType().Equals(obj.GetType()))
-				return false;
-			else
-				return X == ((Coords)obj).X && Y == ((Coords)obj).Y;
-		}
-
-		public static bool operator ==(Coords a, Coords b) => a.Equals(b);
-
-		public static bool operator !=(Coords a, Coords b) => !a.Equals(b);
-
-		public override int GetHashCode() => Tuple.Create(X, Y).GetHashCode();
 	}
 
 	public abstract class Creature
@@ -47,10 +33,10 @@ namespace ConsoleAdventure
 				throw new ArgumentNullException(nameof(location));
 
 			if (location.Size == 0)
-				throw new ArgumentException("public Coords? GenerateCoords(List<Coords?> otherCreaturesAndObjects, Location location) in Class Creature: location.Size was 0");
+				throw new ArgumentException("location.Size was 0");
 
 			if (Math.Pow(location.Size, 2) == otherCreaturesAndObjects.Count)
-				throw new ArgumentException("public Coords? GenerateCoords(List<Coords?> otherCreaturesAndObjects, Location location) in Class Creature: location is already full (location.Size^2 == otherCreaturesAndObjects.Count)");
+				throw new ArgumentException("location is already full (location.Size^2 == otherCreaturesAndObjects.Count)");
 
 			Random rand = new Random((int)location.Size - 1);
 
