@@ -14,8 +14,18 @@ namespace ConsoleAdventure
             return Items.ToList().Find(i => i.Name == name);
         }
 
+        public static Item FindLoot(string name)
+        {
+            return Loot.ToList().Find(l => l.Name == name);
+        }
+
+        /// <summary>
+        /// Contains all predefined items, including weapons and potions.
+        /// </summary>
+        /// <remarks>Does not include enemy loot such as Wolf leather</remarks>
         public static ReadOnlyCollection<Item> Items = new ReadOnlyCollection<Item>(new List<Item>()
         {
+            // Weapons
             new Weapon("Wooden club", 1, Rarities.Common, 0.4),
             new Weapon("Short sword", 2, Rarities.Common, 0.8),
             new Weapon("Long sword", 5, Rarities.Common, 1.2),
@@ -29,11 +39,23 @@ namespace ConsoleAdventure
             new Weapon("Boiko's Spear", 100, Rarities.Arcane, 5),
             new Weapon("Sorochak's Hammer", uint.MaxValue, Rarities.Arcane, 20),
 
+            // Potions
             new HealthBoost("Small health potion", 30, Rarities.Common, 0.1),
             new HealthBoost("Health potion", 50, Rarities.Common, 0.25),
             new HealthBoost("Greater health potion", 100, Rarities.Uncommon, 0.30),
-        }
-            );
+                });
 
+        public static ReadOnlyCollection<Item> Loot = new ReadOnlyCollection<Item>(new List<Item>()
+        {
+            new Item("Wolf leather", Rarities.Common, 0.3),
+            new Item("Wolf meat", Rarities.Common, 1),
+        });
+
+        public static ReadOnlyCollection<Enemy> Enemies = new ReadOnlyCollection<Enemy>(new List<Enemy>()
+        {
+            new Enemy { Name = "Wolf", Health = 80, BaseAttack = 20 },
+            new Enemy { Name = "Forsaken", Health = 100, BaseAttack = 20, weapon = (Weapon)FindItem("Wooden club") },
+            new Enemy { Name = "Rough", Health = 100, BaseAttack = 25, weapon = (Weapon)FindItem("Short sword") },
+        });
     }
 }
