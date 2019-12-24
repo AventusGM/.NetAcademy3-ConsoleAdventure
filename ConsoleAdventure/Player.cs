@@ -11,9 +11,9 @@ namespace ConsoleAdventure
 		public uint Armor { private set; get; }
 		public Inventory Inventory { private set; get; }
 		public Item CurrentItem { set; get; }
-        private QuestManager QuestManager;
+		public QuestManager QuestManager { get; }
 
-		public event EventHandler<KilledTheCreatureEventArgs> KilledTheEnemy;
+		public event EventHandler<KilledTheCreatureEventArgs> KilledTheCreature;
 
 		public Player()
 		{
@@ -21,9 +21,9 @@ namespace ConsoleAdventure
 			Health = 100;
 			Armor = 0;
 			Inventory = new Inventory();
-            QuestManager = new QuestManager(this);
 			CurrentItem = Weapons.WoodenClub;
 			Coords = null;
+			QuestManager = new QuestManager(this);
 		}
 
 		public Player(string name) : this()
@@ -51,12 +51,12 @@ namespace ConsoleAdventure
 			}
 		}
 
-		protected virtual void OnKilledTheEnemy(KilledTheCreatureEventArgs args)
+		protected virtual void OnKilledTheCreature(KilledTheCreatureEventArgs e)
 		{
-			EventHandler<KilledTheCreatureEventArgs> handler = KilledTheEnemy;
+			EventHandler<KilledTheCreatureEventArgs> handler = KilledTheCreature;
 
 			if (handler != null)
-				handler(this, args);
+				handler(this, e);
 		}
 
 		public bool Run()
@@ -79,6 +79,9 @@ namespace ConsoleAdventure
 
 		public override void Hurt(Creature whoToHurt)
 		{
+			if (whoToHurt == null)
+				throw new ArgumentNullException(nameof(whoToHurt));
+
 			if (CurrentItem.GetType() == typeof(Weapon))
 			{
 				if (whoToHurt.GetDamage(((Weapon)CurrentItem).Damage) <= 0)
@@ -86,9 +89,8 @@ namespace ConsoleAdventure
 					Heal(20);
 
 					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
-					OnKilledTheEnemy(args);
+					OnKilledTheCreature(args);
 				}
-
 			}
 			else
 			{
@@ -97,7 +99,7 @@ namespace ConsoleAdventure
 					Heal(25);
 
 					KilledTheCreatureEventArgs args = new KilledTheCreatureEventArgs(whoToHurt);
-					OnKilledTheEnemy(args);
+					OnKilledTheCreature(args);
 				}
 			}
 		}
@@ -138,7 +140,7 @@ namespace ConsoleAdventure
 		public void SelectInventoryItem(int index) //you can use Inventory.Items.IndexOf()
 		{
 			if (index < 0 || index > Inventory.Items.Count)
-				throw new IndexOutOfRangeException("public bool SelectInventoryItem(int index) in class Player: index argument was outside of the bounds");
+				throw new IndexOutOfRangeException("public bool SelectInventoryItem(int index) in Class Player: index argument was outside of the bounds");
 
 			Inventory.Items.Add(CurrentItem);
 
@@ -164,14 +166,16 @@ namespace ConsoleAdventure
 		public override bool MoveUp(Location currentLocation)
 		{
 			if (Coords == null)
-				throw new NullReferenceException("Coords was null");
+				throw new NullReferenceException("public override bool MoveUp(Location currentLocation) in Class Player: Coords was null");
 
 			if (currentLocation == null)
 				throw new ArgumentNullException(nameof(currentLocation));
 
-			Coords potentialCoords = new Coords();
-			potentialCoords.X = Coords.Value.X;
-			potentialCoords.Y = Coords.Value.Y;
+			Coords potentialCoords = new Coords
+			{
+				X = Coords.Value.X,
+				Y = Coords.Value.Y
+			};
 
 			--potentialCoords.Y;
 
@@ -187,14 +191,16 @@ namespace ConsoleAdventure
 		public override bool MoveDown(Location currentLocation)
 		{
 			if (Coords == null)
-				throw new NullReferenceException("Coords was null");
+				throw new NullReferenceException("public override bool MoveDown(Location currentLocation) in Class Player: Coords was null");
 
 			if (currentLocation == null)
 				throw new ArgumentNullException(nameof(currentLocation));
 
-			Coords potentialCoords = new Coords();
-			potentialCoords.X = Coords.Value.X;
-			potentialCoords.Y = Coords.Value.Y;
+			Coords potentialCoords = new Coords
+			{
+				X = Coords.Value.X,
+				Y = Coords.Value.Y
+			};
 
 			++potentialCoords.Y;
 
@@ -210,14 +216,16 @@ namespace ConsoleAdventure
 		public override bool MoveLeft(Location currentLocation)
 		{
 			if (Coords == null)
-				throw new NullReferenceException("Coords was null");
+				throw new NullReferenceException("public override bool MoveLeft(Location currentLocation) in Class Player: Coords was null");
 
 			if (currentLocation == null)
 				throw new ArgumentNullException(nameof(currentLocation));
 
-			Coords potentialCoords = new Coords();
-			potentialCoords.X = Coords.Value.X;
-			potentialCoords.Y = Coords.Value.Y;
+			Coords potentialCoords = new Coords
+			{
+				X = Coords.Value.X,
+				Y = Coords.Value.Y
+			};
 
 			--potentialCoords.X;
 
@@ -233,14 +241,16 @@ namespace ConsoleAdventure
 		public override bool MoveRight(Location currentLocation)
 		{
 			if (Coords == null)
-				throw new NullReferenceException("Coords was null");
+				throw new NullReferenceException("public override bool MoveRight(Location currentLocation) in Class Player: Coords was null");
 
 			if (currentLocation == null)
 				throw new ArgumentNullException(nameof(currentLocation));
 
-			Coords potentialCoords = new Coords();
-			potentialCoords.X = Coords.Value.X;
-			potentialCoords.Y = Coords.Value.Y;
+			Coords potentialCoords = new Coords
+			{
+				X = Coords.Value.X,
+				Y = Coords.Value.Y
+			};
 
 			++potentialCoords.X;
 
@@ -252,45 +262,5 @@ namespace ConsoleAdventure
 
 			return false;
 		}
-
-		/*public Item AddToInventory(Item item)
-		{
-			if (item.GetType() == typeof(Weapon))
-			{
-				if (!Inventory.Items.Contains(item))
-					Inventory.Items.Add(item);
-			}
-			else
-			{
-				Inventory.Items.Add(item);
-			}
-
-			return item;
-		}
-
-		public Item[] AddToInventory(Item[] items)
-		{
-			foreach (Item current in items)
-			{
-				AddToInventory(current);
-			}
-
-			return items;
-		}
-
-		public IEnumerable<Item> AddToInventory(IEnumerable<Item> items)
-		{
-			foreach (Item current in items)
-			{
-				AddToInventory(current);
-			}
-
-			return items;
-		}
-
-		public void RmCurrentFromInventory()
-		{
-			Inventory.Items.RemoveAt((int)InventoryCurrent);
-		}*/
 	}
 }
