@@ -17,6 +17,12 @@ namespace ConsoleAdventure
 			Size = 0;
 		}
 
+		public Location(string title)
+		{
+			Title = title;
+			Size = 10;
+		}
+
 		public Location(string title, uint size)
 		{
 			Title = title;
