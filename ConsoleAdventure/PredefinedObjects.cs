@@ -13,7 +13,7 @@ namespace ConsoleAdventure
         /// Contains all predefined items, including weapons and potions.
         /// </summary>
         /// <remarks>Does not include enemy loot such as Wolf leather</remarks>
-        public static readonly ReadOnlyCollection<Item> Items = new ReadOnlyCollection<Item>(new List<Item>()
+        public static List<Item> Items = new List<Item>(new List<Item>()
         {
             // Weapons
             new Weapon("Wooden club", 1, Rarities.Common, 0.4),
@@ -56,6 +56,19 @@ namespace ConsoleAdventure
         public static Item FindLoot(string name)
         {
             return Loot.ToList().Find(l => l.Name == name);
+        }
+
+        static PredefinedObjects()
+        {
+            Items = new List<Item>();
+            Items.Add(new Weapon("Wooden club", 1, Rarities.Common, 0.4));
+            Init();
+        }
+
+        static void Init()
+        {
+            Items = new List<Item>();
+            Items.Add(new Weapon("Wooden club", 1, Rarities.Common, 0.4));
         }
     }
 }
