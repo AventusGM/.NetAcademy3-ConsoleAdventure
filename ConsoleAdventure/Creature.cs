@@ -52,17 +52,17 @@ namespace ConsoleAdventure
 			if (Math.Pow(location.Size, 2) == otherCreaturesAndObjects.Count)
 				throw new ArgumentException("public Coords? GenerateCoords(List<Coords?> otherCreaturesAndObjects, Location location) in Class Creature: location is already full (location.Size^2 == otherCreaturesAndObjects.Count)");
 
-			Random rand = new Random((int)location.Size - 1);
+			Random rand = new Random();
 
 			if (otherCreaturesAndObjects == null)
 			{
-				Coords = new Coords(rand.Next(), rand.Next());
+				Coords = new Coords(rand.Next((int)location.Size), rand.Next((int)location.Size));
 			}
 			else
 			{
 				do
 				{
-					Coords = new Coords(rand.Next(), rand.Next());
+					Coords = new Coords(rand.Next((int)location.Size), rand.Next((int)location.Size));
 				} while (otherCreaturesAndObjects.Contains(Coords));
 			}
 

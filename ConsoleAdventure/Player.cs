@@ -22,7 +22,7 @@ namespace ConsoleAdventure
 			Armor = 0;
 			Inventory = new Inventory();
 			CurrentItem = PredefinedObjects.FindItem("Wooden club");
-			Coords = null;
+			Coords = new Coords();
 			QuestManager = new QuestManager(this);
 		}
 
@@ -61,9 +61,9 @@ namespace ConsoleAdventure
 
 		public bool Run()
 		{
-			Random rand = new Random(2);
+			Random rand = new Random();
 
-			int damageRandomizer = rand.Next();
+			int damageRandomizer = rand.Next(3);
 
 			if (damageRandomizer != 0)
 			{
