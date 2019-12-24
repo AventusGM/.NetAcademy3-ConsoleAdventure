@@ -23,11 +23,6 @@ namespace ConsoleAdventure
 
         void Start()
         {
-            foreach(Item item in new TreasureChest(Rarities.Common).Content)
-            {
-                Console.WriteLine(item.Name);
-            }
-            
             running = true;
             list = new List<Coords?>();
             input = new InputHandler();
