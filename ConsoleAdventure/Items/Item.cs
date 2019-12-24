@@ -8,11 +8,6 @@ namespace ConsoleAdventure
 {
     public class Item : ICloneable
     {
-        /// <summary>
-        /// Contains every sample of defined items.
-        /// </summary>
-        public static readonly List<Item> DefinedItems = new List<Item>();
-
         public string Name { get; set; }
 
         public Rarity Rarity { get; set; }

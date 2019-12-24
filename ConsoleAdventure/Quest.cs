@@ -92,7 +92,7 @@ namespace ConsoleAdventure
     public static class Quests
     {
         public static Quest TheBeginning = new KillQuest("The beginning", "Kill your first enemy"
-            ,new List<Item>() { Weapons.Sword, HealthBoosters.HealthPotion }
+            ,new List<Item>() { (Weapon)PredefinedObjects.FindItem("Wooden club"), (Weapon)PredefinedObjects.FindItem("Health potion") }
             ,typeof(Creature), 1);
     }
 }
