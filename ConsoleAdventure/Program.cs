@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ConsoleAdventure
@@ -7,7 +8,11 @@ namespace ConsoleAdventure
     {
         bool running;
         Player player;
+        Location location;
         InputHandler input;
+
+        List<Coords?> list;
+        public static Coords enemy;
 
         static void Main(string[] args)
         {
@@ -19,24 +24,39 @@ namespace ConsoleAdventure
         void Start()
         {
             running = true;
+            list = new List<Coords?>();
             input = new InputHandler();
+            location = new Location(Menu());
+            player = new Player("Player", SpawnEnemies(list, 5) ,location);
 
-            Menu();
             while (running)
             {
-                input.Handle();
+                input.Handle(player, location);
             }
         }
 
-        void Menu()
+        static List<Coords?> SpawnEnemies(List<Coords?> enemies, int count)
+        {
+            Random rand = new Random();
+            List<Coords?> list = new List<Coords?>();
+
+            for (int i = 0; i < count; i++)
+            {
+                enemy = new Coords(rand.Next(1, 10), rand.Next(1, 10));
+                list.Add(enemy);
+            }
+
+            return list;
+        }
+
+        string Menu()
         {
             string[] locations = { "Forest", "Mountains", "Cave", "Sea" };
 
             Console.WriteLine("Welcome to Console Adventure!");
-            Console.Write("Input your name: ");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("Hello, " + name + "!\n");
+            //Console.Write("Input your name: ");
+            //string name = Console.ReadLine();
+            //Console.WriteLine("Hello, " + name + "!\n");
             Console.WriteLine("Available locations: ");
 
             foreach (var loc in locations)
@@ -55,10 +75,7 @@ namespace ConsoleAdventure
                 }
             }
             ShowHelp();
-        }
-
-        void Update(Player player)
-        {
+            return input;
         }
 
         public static void ShowHelp()
