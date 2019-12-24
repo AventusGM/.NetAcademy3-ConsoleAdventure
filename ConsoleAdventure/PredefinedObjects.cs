@@ -7,23 +7,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleAdventure
 {
-    static class PredefinedObjects
+    public static class PredefinedObjects
     {
-        public static Item FindItem(string name)
-        {
-            return Items.ToList().Find(i => i.Name == name);
-        }
-
-        public static Item FindLoot(string name)
-        {
-            return Loot.ToList().Find(l => l.Name == name);
-        }
-
         /// <summary>
         /// Contains all predefined items, including weapons and potions.
         /// </summary>
         /// <remarks>Does not include enemy loot such as Wolf leather</remarks>
-        public static ReadOnlyCollection<Item> Items = new ReadOnlyCollection<Item>(new List<Item>()
+        public static readonly ReadOnlyCollection<Item> Items = new ReadOnlyCollection<Item>(new List<Item>()
         {
             // Weapons
             new Weapon("Wooden club", 1, Rarities.Common, 0.4),
@@ -57,5 +47,15 @@ namespace ConsoleAdventure
             new Enemy { Name = "Forsaken", Health = 100, BaseAttack = 20, weapon = (Weapon)FindItem("Wooden club") },
             new Enemy { Name = "Rough", Health = 100, BaseAttack = 25, weapon = (Weapon)FindItem("Short sword") },
         });
+
+        public static Item FindItem(string name)
+        {
+            return Items.ToList().Find(i => i.Name == name);
+        }
+
+        public static Item FindLoot(string name)
+        {
+            return Loot.ToList().Find(l => l.Name == name);
+        }
     }
 }

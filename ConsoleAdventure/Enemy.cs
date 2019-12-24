@@ -41,12 +41,5 @@ namespace ConsoleAdventure
         {
             p.GetDamage(Damage);
         }
-
-        public class Enemies
-        {
-            Enemy wolf = new Enemy { Name = "The Big Evil Wolf", Health = 80, BaseAttack = 20 };
-            Enemy forsaken = new Enemy { Name = "Forsaken", Health = 100, BaseAttack = 20, weapon = (Weapon)PredefinedObjects.FindItem("Wooden club") };
-            Enemy rough = new Enemy { Name = "Rough", Health = 100, BaseAttack = 25, weapon = (Weapon)PredefinedObjects.FindItem("Short sword") };
-        }
     }
 }

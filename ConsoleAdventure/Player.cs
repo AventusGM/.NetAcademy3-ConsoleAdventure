@@ -21,7 +21,7 @@ namespace ConsoleAdventure
 			Health = 100;
 			Armor = 0;
 			Inventory = new Inventory();
-			CurrentItem = PredefinedObjects.FindItem("Wooden club");
+			CurrentItem = (Weapon)PredefinedObjects.FindItem("Wooden club").Clone();
 			Coords = null;
 			QuestManager = new QuestManager(this);
 		}

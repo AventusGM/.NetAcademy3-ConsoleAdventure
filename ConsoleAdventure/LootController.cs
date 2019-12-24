@@ -84,20 +84,10 @@ namespace ConsoleAdventure
             {
                 // For example
                 case "Wolf":
-                    return GetRandomItems(0, 2, Loot.WolfLeather, Loot.WolfMeat);
+                    return GetRandomItems(0, 2, PredefinedObjects.FindLoot("Wolf leather"), PredefinedObjects.FindLoot("Wolf meat"));
                 default:
                     return null;
             }
         }
-    }
-
-    /// <summary>
-    /// Avalible loot
-    /// </summary>
-    public static class Loot
-    {
-        // For example
-        public static Item WolfLeather = new Item("Wolf leather", Rarities.Common, 0.3);
-        public static Item WolfMeat = new Item("Wolf meat", Rarities.Common, 1);
     }
 }
